@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Good Night Roushani Didi – Chat by Chnadu</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #111;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .chat-container {
+      flex-grow: 1;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .message {
+      max-width: 70%;
+      padding: 12px 18px;
+      margin: 8px;
+      border-radius: 20px;
+      position: relative;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .from-chnadu {
+      align-self: flex-end;
+      background: #0f62fe;
+      color: white;
+      border-bottom-right-radius: 0;
+    }
+
+    .from-didi {
+      align-self: flex-start;
+      background: #333;
+      border-bottom-left-radius: 0;
+    }
+
+    .name {
+      font-size: 0.8em;
+      color: #aaa;
+      margin-bottom: 4px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .typing {
+      font-style: italic;
+      color: gray;
+      margin: 4px 16px;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
+
+    footer {
+      padding: 10px;
+      text-align: center;
+      background: #1a1a1a;
+      font-size: 0.9em;
+      color: #999;
+    }
+  </style>
+</head>
+<body>
+
+<div class="chat-container" id="chat">
+  <!-- Messages will appear here -->
+</div>
+
+<footer>
+  Made with ❤️ by Chnadu for Roushani Didi
+</footer>
+
+<script>
+  const messages = [
+        { from: 'chnadu', name: 'Chnadu', text: "Hii Rousni didi ? 😊" },
+    
+    { from: 'chnadu', name: 'Chnadu', text: "kya haal hai aapka? 😊" },
+    { from: 'chnadu', name: 'Chnadu', text: "Aasha karta hoon aapka din achha gaya hoga 🌞" },
+    { from: 'chnadu', name: 'Chnadu', text: "Aur haan, ek baat to pakki hai..." },
+    { from: 'chnadu', name: 'Chnadu', text: "Aapne abhi tak khana nahi khaya hoga 😄" },
+    { from: 'didi', name: 'Roushani Didi', text: "Kyu bhai, aapko kaise pata? 🤔" },
+    { from: 'chnadu', name: 'Chnadu', text: "Kyuki main jaanta hoon  aaj kal aap kuch jyda hii busy rahte hai . PADHAI karna aur khana banana rahta hai upser se ye BPSC TRE.4.0 KA VAACANCY.   To late  hoga hii khana  khane me ..  😅" },
+    { from: 'chnadu', name: 'Chnadu', text: "Aur main toh bas chaahta hoon ki aap healthy aur khush raho hamesha 🥰" },
+    { from: 'chnadu', name: 'Chnadu', text: " to Aaram se khana kha lijiyega 🌈" },
+    { from: 'chnadu', name: 'Chnadu', text: "Toh chaliye ab aap araam kariye 😊" },
+    { from: 'chnadu', name: 'Chnadu', text: "GOOD NIGHT 🌙💫" },
+    { from: 'chnadu', name: 'Chnadu', text: "Sweet dreams my sweetest Roushani Didi 💖" }
+  ];
+
+  let index = 0;
+  const chat = document.getElementById("chat");
+
+  function addMessage(msg) {
+    const wrapper = document.createElement("div");
+    wrapper.className = `message ${msg.from === 'chnadu' ? 'from-chnadu' : 'from-didi'}`;
+
+    const nameTag = document.createElement("div");
+    nameTag.className = "name";
+    nameTag.textContent = msg.name;
+
+    const bubble = document.createElement("div");
+    bubble.textContent = msg.text;
+
+    wrapper.appendChild(nameTag);
+    wrapper.appendChild(bubble);
+    chat.appendChild(wrapper);
+    chat.scrollTop = chat.scrollHeight;
+  }
+
+  function showNextMessage() {
+    if (index < messages.length) {
+      const typing = document.createElement("div");
+      typing.className = "typing";
+      typing.textContent = `${messages[index].name} is typing...`;
+      chat.appendChild(typing);
+      chat.scrollTop = chat.scrollHeight;
+
+      setTimeout(() => {
+        chat.removeChild(typing);
+        addMessage(messages[index]);
+        index++;
+        setTimeout(showNextMessage, 1500);
+      }, 1500);
+    }
+  }
+
+  showNextMessage();
+</script>
+
+</body>
+</html>
